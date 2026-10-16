@@ -17,7 +17,7 @@ export default function HeroSection() {
         animate={inView ? { scale: 1 } : {}}
         transition={{ duration: 15, ease: "easeOut" }}
         className="absolute inset-0 bg-cover bg-[center_25%] sm:bg-center bg-no-repeat"
-        style={{ backgroundImage: 'url(/images/whatsapp_photo_1.jpeg)' }}
+        style={{ backgroundImage: 'url(/pre/couple-3.jpeg)' }}
       />
 
       {/* Dark Premium Overlay */}
@@ -30,23 +30,23 @@ export default function HeroSection() {
           initial={{ opacity: 0, y: 30 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 1 }}
-          className="mb-8 inline-flex items-center gap-4 rounded-full border border-primary/30 bg-white/5 px-6 py-2.5 backdrop-blur-xl"
+          className="mb-8 inline-flex items-center gap-4 rounded-full border border-secondary/40 bg-white/5 px-6 py-2.5 backdrop-blur-xl"
         >
-          <div className="h-px w-8 bg-primary/50" />
-          <span className="text-xs font-bold uppercase tracking-[0.5em] text-primary">
+          <div className="h-px w-8 bg-secondary/60" />
+          <span className="text-xs font-bold uppercase tracking-[0.5em] text-secondary">
             Wedding Ceremony
           </span>
-          <div className="h-px w-8 bg-primary/50" />
+          <div className="h-px w-8 bg-secondary/60" />
         </motion.div>
 
         <motion.h1
           initial={{ opacity: 0, y: 40 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 1.2, delay: 0.1 }}
-          className="font-serif text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-bold tracking-tight leading-[1.1] bg-gradient-to-b from-[#f3e3c0] via-[#C9A227] to-[#8d6e1d] bg-clip-text text-transparent drop-shadow-[0_4px_4px_rgba(0,0,0,0.25)]"
+          className="font-serif text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-bold tracking-tight leading-[1.1] bg-gradient-to-b from-[#fbd3e2] via-[#eb81a9] to-[#c45d87] bg-clip-text text-transparent drop-shadow-[0_4px_4px_rgba(0,0,0,0.25)]"
         >
-          NIPUNI <span className="text-white italic opacity-80">&amp;</span> <br className="sm:hidden" />
-          RAVINDU
+          KITHMI <span className="text-white italic opacity-80">&amp;</span> <br className="sm:hidden" />
+          RESHAN
         </motion.h1>
 
         <motion.p
@@ -67,7 +67,7 @@ export default function HeroSection() {
           <div className="flex flex-col items-center">
              <p className="text-[10px] uppercase tracking-[0.6em] text-primary font-bold mb-4 opacity-70 group-hover:opacity-100 transition-opacity">Save the Date</p>
              <h2 className="font-serif text-3xl text-white sm:text-5xl tracking-wide">
-               FRIDAY <span className="text-primary mx-2">31</span> JULY 2026
+               SATURDAY <span className="text-primary mx-2">23</span> JANUARY 2027
              </h2>
              <div className="mt-6 flex items-center gap-6 text-white/40">
                 <div className="h-px w-12 bg-white/20" />

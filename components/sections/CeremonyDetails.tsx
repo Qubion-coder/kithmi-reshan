@@ -13,24 +13,24 @@ export default function CeremonyDetails() {
 
   const detailGroups = [
     {
-      key: 'poruwa',
-      title: 'Poruwa Ceremony',
+      key: 'church',
+      title: 'Holy Matrimony',
       timeLabel: 'Ceremony Time',
-      timeValue: '8:30 AM',
-      timeSub: 'Traditional Sri Lankan Ceremony',
+      timeValue: '11:00 AM',
+      timeSub: 'Church Wedding Ceremony',
       venueLabel: 'Venue',
-      venueValue: 'OUTDOOR DECK, WATERS EDGE',
-      venueSub: '316, ETHUL KOTTE RD, BATTARAMULLA',
+      venueValue: "ST. JOSEPH'S CHURCH",
+      venueSub: 'WENNAPPUWA',
     },
     {
       key: 'reception',
       title: 'Wedding Reception',
       timeLabel: 'Reception Time',
-      timeValue: '10:00 AM - 4:00 PM',
-      timeSub: 'Grand Celebration & Dining',
+      timeValue: '6:00 PM Onwards',
+      timeSub: 'Celebration & Dinner',
       venueLabel: 'Venue',
-      venueValue: 'GRAND BALLROOM, WATERS EDGE',
-      venueSub: '316, ETHUL KOTTE RD, BATTARAMULLA',
+      venueValue: 'MAZE GLASSHOUSE',
+      venueSub: 'WENNAPPUWA',
     },
   ];
 
@@ -127,7 +127,7 @@ export default function CeremonyDetails() {
               >
                 <div className="absolute right-0 top-0 opacity-15">
                   <img
-                    src="/Screenshot 2026-05-08 031308.png"
+                    src="/images/monogram-kr.png"
                     alt="Monogram"
                     className="w-32 h-32 -mt-8 -mr-8 object-contain"
                   />

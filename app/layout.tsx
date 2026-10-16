@@ -22,17 +22,17 @@ const pinyonScript = Pinyon_Script({
 })
 
 export const metadata: Metadata = {
-  title: 'NIPUNI & RAVINDU Wedding',
-  description: 'Join us as we celebrate the wedding of NIPUNI and RAVINDU on July 31, 2026.',
+  title: 'KITHMI & RESHAN Wedding',
+  description: 'Join us as we celebrate the wedding of Kithmi and Reshan on January 23, 2027.',
   generator: 'v0.app',
   icons: {
-    icon: '/Screenshot 2026-05-08 031308.png',
-    apple: '/Screenshot 2026-05-08 031308.png',
+    icon: '/images/favicon-kr.png',
+    apple: '/images/favicon-kr.png',
   },
 }
 
 export const viewport: Viewport = {
-  themeColor: '#D4AF37',
+  themeColor: '#eb81a9',
   width: 'device-width',
   initialScale: 1,
   userScalable: true,

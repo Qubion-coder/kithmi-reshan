@@ -91,12 +91,12 @@ export default function BlessingsSection() {
         <motion.div
           animate={{ x: [0, 40, 0], y: [0, -30, 0], scale: [1, 1.2, 1] }}
           transition={{ duration: 15, repeat: Infinity, ease: 'easeInOut' }}
-          className="absolute -left-[10%] top-[20%] h-[40vw] w-[40vw] rounded-full bg-gradient-to-tr from-[#ffdce1] to-[#ffeacc] opacity-70 blur-[100px]"
+          className="absolute -left-[10%] top-[20%] h-[40vw] w-[40vw] rounded-full bg-gradient-to-tr from-[#ffdce1] to-[#f8c9db] opacity-70 blur-[100px]"
         />
         <motion.div
           animate={{ x: [0, -40, 0], y: [0, 50, 0], scale: [1, 1.1, 1] }}
           transition={{ duration: 18, repeat: Infinity, ease: 'easeInOut', delay: 2 }}
-          className="absolute -right-[10%] -top-[10%] h-[50vw] w-[50vw] rounded-full bg-gradient-to-bl from-[#ece2ff] to-[#ffe2ea] opacity-60 blur-[100px]"
+          className="absolute -right-[10%] -top-[10%] h-[50vw] w-[50vw] rounded-full bg-gradient-to-bl from-[#dfe8c8] to-[#ffe2ea] opacity-60 blur-[100px]"
         />
         <div
           className="absolute inset-0 opacity-[0.14]"
@@ -112,7 +112,7 @@ export default function BlessingsSection() {
         {floatingParticles.map((particle) => (
           <motion.div
             key={particle.id}
-            className="absolute text-[#d39a7a]/55"
+            className="absolute text-[#eb81a9]/55"
             style={{ left: particle.left, top: particle.top }}
             animate={{
               y: [0, -80, 0],
@@ -142,18 +142,18 @@ export default function BlessingsSection() {
           <motion.div
             whileHover={{ scale: 1.08, rotate: -5 }}
             transition={{ type: 'spring', bounce: 0.6 }}
-            className="relative mx-auto mb-8 h-32 w-32 rounded-full border-8 border-white bg-white p-[2px] shadow-[0_18px_42px_rgba(189,126,84,0.3)] md:h-44 md:w-44"
+            className="relative mx-auto mb-8 h-32 w-32 rounded-full border-8 border-white bg-white p-[2px] shadow-[0_18px_42px_rgba(235,129,169,0.3)] md:h-44 md:w-44"
           >
-            <div className="relative flex h-full w-full items-center justify-center rounded-full bg-[radial-gradient(circle,rgba(255,190,198,0.3),rgba(255,255,255,0.95))]">
+            <div className="relative flex h-full w-full items-center justify-center rounded-full bg-[radial-gradient(circle,rgba(235,129,169,0.3),rgba(255,255,255,0.95))]">
               <Heart className="h-12 w-12 text-primary fill-primary/20" />
             </div>
-            <Sparkles className="absolute -right-4 -top-2 h-8 w-8 animate-pulse text-[#d28a64]" />
-            <Sparkles className="absolute -bottom-4 -left-2 h-6 w-6 animate-pulse text-[#baa7df]" />
+            <Sparkles className="absolute -right-4 -top-2 h-8 w-8 animate-pulse text-[#eb81a9]" />
+            <Sparkles className="absolute -bottom-4 -left-2 h-6 w-6 animate-pulse text-[#97aa6a]" />
           </motion.div>
 
           <motion.div
             whileHover={{ scale: 1.05, rotate: 2 }}
-            className="mb-6 inline-flex items-center gap-2 rounded-full border border-primary/25 bg-white/70 px-5 py-2.5 shadow-[0_10px_30px_rgba(255,190,198,0.18)] backdrop-blur-md"
+            className="mb-6 inline-flex items-center gap-2 rounded-full border border-primary/25 bg-white/70 px-5 py-2.5 shadow-[0_10px_30px_rgba(235,129,169,0.18)] backdrop-blur-md"
           >
             <Heart className="h-5 w-5 text-primary fill-primary/20" />
             <span className="text-sm font-bold uppercase tracking-[0.2em] text-primary">
@@ -196,9 +196,9 @@ export default function BlessingsSection() {
             transition={{ duration: 1, delay: 0.2, type: 'spring', bounce: 0.4 }}
             className="relative perspective-[1000px]"
           >
-            <div className="relative overflow-hidden rounded-[2.5rem] border border-primary/20 bg-[linear-gradient(150deg,rgba(255,255,255,0.9)_0%,rgba(255,244,245,0.85)_100%)] p-6 shadow-[0_20px_52px_rgba(255,190,198,0.18)] backdrop-blur-xl md:p-10">
-              <div className="absolute -right-[10%] -top-[10%] h-[150px] w-[150px] rounded-full bg-[#f1c79d]/30 blur-[40px]" />
-              <div className="absolute -bottom-[10%] -left-[10%] h-[150px] w-[150px] rounded-full bg-[#c8b6ff]/28 blur-[40px]" />
+            <div className="relative overflow-hidden rounded-[2.5rem] border border-primary/20 bg-[linear-gradient(150deg,rgba(255,255,255,0.9)_0%,rgba(255,244,245,0.85)_100%)] p-6 shadow-[0_20px_52px_rgba(235,129,169,0.18)] backdrop-blur-xl md:p-10">
+              <div className="absolute -right-[10%] -top-[10%] h-[150px] w-[150px] rounded-full bg-[#f8c9db]/30 blur-[40px]" />
+              <div className="absolute -bottom-[10%] -left-[10%] h-[150px] w-[150px] rounded-full bg-[#dfe8c8]/28 blur-[40px]" />
 
               <div className="relative z-10">
                 <div className="mb-8 flex items-center gap-3">
@@ -218,7 +218,7 @@ export default function BlessingsSection() {
                         value={visitorName}
                         onChange={(e) => setVisitorName(e.target.value)}
                         placeholder="John & Jane Doe"
-                        className="h-14 w-full rounded-2xl border border-primary/10 bg-white/65 pl-12 pr-4 text-foreground placeholder-primary/30 outline-none transition-all duration-300 focus:border-primary focus:bg-white focus:shadow-[0_10px_20px_rgba(255,190,198,0.12)] group-hover:bg-white/90"
+                        className="h-14 w-full rounded-2xl border border-primary/10 bg-white/65 pl-12 pr-4 text-foreground placeholder-primary/30 outline-none transition-all duration-300 focus:border-primary focus:bg-white focus:shadow-[0_10px_20px_rgba(235,129,169,0.12)] group-hover:bg-white/90"
                         required
                       />
                     </div>
@@ -233,7 +233,7 @@ export default function BlessingsSection() {
                         onChange={(e) => setNewBlessing(e.target.value)}
                         placeholder="Share your sweetest wishes..."
                         rows={4}
-                        className="w-full resize-none rounded-[1.5rem] border border-primary/10 bg-white/65 px-4 py-4 pl-12 text-foreground placeholder-primary/30 outline-none transition-all duration-300 focus:border-primary focus:bg-white focus:shadow-[0_10px_20px_rgba(255,190,198,0.12)] group-hover:bg-white/90"
+                        className="w-full resize-none rounded-[1.5rem] border border-primary/10 bg-white/65 px-4 py-4 pl-12 text-foreground placeholder-primary/30 outline-none transition-all duration-300 focus:border-primary focus:bg-white focus:shadow-[0_10px_20px_rgba(235,129,169,0.12)] group-hover:bg-white/90"
                         required
                       />
                     </div>
@@ -246,7 +246,7 @@ export default function BlessingsSection() {
                     onHoverEnd={() => setIsHoveringSend(false)}
                     type="submit"
                     disabled={isSubmitting}
-                    className="group relative inline-flex w-full items-center justify-center gap-3 overflow-hidden rounded-full border border-primary bg-primary px-6 py-4 text-white shadow-[0_10px_20px_rgba(255,190,198,0.35)] transition-all hover:bg-primary/90 hover:shadow-[0_15px_30px_rgba(255,190,198,0.42)]"
+                    className="group relative inline-flex w-full items-center justify-center gap-3 overflow-hidden rounded-full border border-primary bg-primary px-6 py-4 text-white shadow-[0_10px_20px_rgba(235,129,169,0.35)] transition-all hover:bg-primary/90 hover:shadow-[0_15px_30px_rgba(235,129,169,0.42)]"
                   >
                     <span className="relative z-10 text-sm font-bold uppercase tracking-[0.2em]">{isSubmitting ? 'Sending...' : 'Send Blessing'}</span>
                     <motion.div
@@ -286,7 +286,7 @@ export default function BlessingsSection() {
           </motion.div>
 
           <div className="relative space-y-6 pt-4">
-            <div className="pointer-events-none absolute inset-x-0 bottom-[-2rem] z-20 h-20 bg-gradient-to-t from-[#fff8ee] to-transparent" />
+            <div className="pointer-events-none absolute inset-x-0 bottom-[-2rem] z-20 h-20 bg-gradient-to-t from-[#fdf2f6] to-transparent" />
 
             <AnimatePresence mode="popLayout">
               {blessings.map((blessing, index) => (
@@ -302,7 +302,7 @@ export default function BlessingsSection() {
                     bounce: 0.4,
                   }}
                   whileHover={{ y: -5, scale: 1.02 }}
-                  className="group relative overflow-hidden rounded-[2rem] border border-[#efdcc9] bg-white/70 p-6 shadow-sm backdrop-blur-md transition-all hover:bg-white hover:shadow-[0_15px_30px_rgba(191,119,82,0.2)] md:p-8"
+                  className="group relative overflow-hidden rounded-[2rem] border border-[#f3d3df] bg-white/70 p-6 shadow-sm backdrop-blur-md transition-all hover:bg-white hover:shadow-[0_15px_30px_rgba(235,129,169,0.2)] md:p-8"
                 >
                   <div className="absolute -right-[10px] -top-[10px] opacity-10 transition-transform duration-500 group-hover:rotate-12 group-hover:scale-110">
                     <Quote className="h-24 w-24 fill-current text-primary" />

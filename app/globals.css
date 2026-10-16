@@ -5,16 +5,16 @@
 
 /* Premium Sri Lankan Kandyan Wedding Theme */
 :root {
-  /* Primary Colors - Pink & Green Theme */
-  --theme-gold: #d8b78c;
-  --theme-gold-light: #d9d1c6;
-  --theme-sage: #9eaa94;
-  --theme-sage-muted: #9c9f98;
-  --theme-ivory: #e8e8e6;
+  /* Primary Colors - Dusty Pink (#eb81a9) & Green (#97aa6a) Theme */
+  --theme-gold: #eb81a9; /* dusty pink */
+  --theme-gold-light: #f6d3e1;
+  --theme-sage: #97aa6a; /* green */
+  --theme-sage-muted: #b5c296;
+  --theme-ivory: #fdf6f8;
   --white: #FFFFFF;
   --text-dark: #3a3b38;
   --text-muted: #71736e;
-  --border-light: #d9d1c6;
+  --border-light: #f1d6e1;
   
   /* Design System Mappings */
   --background: var(--theme-ivory);
@@ -134,19 +134,19 @@
 
 @keyframes glow {
   0%, 100% {
-    box-shadow: 0 0 15px rgba(181, 197, 122, 0.4);
+    box-shadow: 0 0 15px rgba(151,170,106, 0.4);
   }
   50% {
-    box-shadow: 0 0 30px rgba(181, 197, 122, 0.7);
+    box-shadow: 0 0 30px rgba(151,170,106, 0.7);
   }
 }
 
 @keyframes glow-pink {
   0%, 100% {
-    box-shadow: 0 0 15px rgba(255, 190, 198, 0.3);
+    box-shadow: 0 0 15px rgba(235,129,169, 0.3);
   }
   50% {
-    box-shadow: 0 0 30px rgba(255, 190, 198, 0.5);
+    box-shadow: 0 0 30px rgba(235,129,169, 0.5);
   }
 }
 

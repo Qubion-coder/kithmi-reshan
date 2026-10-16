@@ -38,13 +38,16 @@ export default function PersonalizedWelcome({ guestName }: PersonalizedWelcomePr
           animate={inView ? { opacity: 1, scale: 1 } : {}}
           transition={{ duration: 1, delay: 0.2 }}
         >
-          <p className="text-[#8c6a16] text-xs uppercase tracking-[0.4em] mb-4 font-semibold">
+          <p className="text-[#b4527a] text-xs uppercase tracking-[0.4em] mb-4 font-semibold">
             Special Welcome For
           </p>
-          <h2 className="font-serif text-4xl md:text-6xl text-[#6a4d0d] mb-6 italic drop-shadow-sm">
+          <h2 className="font-serif text-4xl md:text-6xl text-[#8f3d60] mb-6 italic drop-shadow-sm">
             {guestName}
           </h2>
           <div className="w-24 h-px bg-gradient-to-r from-transparent via-primary/40 to-transparent mx-auto mb-8" />
+          <p className="max-w-xl mx-auto mb-4 font-serif text-lg md:text-2xl italic text-[#5f5146] leading-relaxed">
+            We cordially invite <span className="not-italic font-semibold text-[#b4527a]">{guestName}</span> to celebrate our special day with us.
+          </p>
           <p className="max-w-xl mx-auto text-[#5f5146] text-sm md:text-base leading-relaxed font-light tracking-wide">
             We are truly honored to have you with us as we celebrate the beginning of our new life together. Your presence makes our special day even more meaningful.
           </p>

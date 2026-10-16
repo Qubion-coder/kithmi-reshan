@@ -1,47 +1,58 @@
 'use client';
 
 import React, { useState } from 'react';
-import { motion } from 'framer-motion';
-import { Copy, Check, Link as LinkIcon, Sparkles, User, Settings } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Copy, Check, Link as LinkIcon, Sparkles, User, Settings, MessageCircle } from 'lucide-react';
+import {
+  WEDDING,
+  GUEST_PREFIXES,
+  type GuestPrefix,
+  formatGuestName,
+  buildInvitationLink,
+  buildInvitationMessage,
+} from '@/lib/wedding';
 
 export default function AdminPage() {
+  const [prefix, setPrefix] = useState<GuestPrefix>('Mr.');
   const [name, setName] = useState('');
-  const [title, setTitle] = useState('Mr');
   const [generatedLink, setGeneratedLink] = useState('');
-  const [copied, setCopied] = useState(false);
-
-  const titles = ['Mr', 'Mrs', 'Miss', 'Family', 'Mr & Mrs', 'Dr', 'Prof'];
+  const [displayName, setDisplayName] = useState('');
+  const [toast, setToast] = useState('');
 
   const generateLink = () => {
-    const baseUrl = window.location.origin;
-    const params = new URLSearchParams();
-    if (name) params.set('to', name);
-    if (title) params.set('t', title);
-    
-    const url = `${baseUrl}?${params.toString()}`;
-    setGeneratedLink(url);
-    setCopied(false);
+    const formatted = formatGuestName(prefix, name);
+    if (!formatted) return;
+    setDisplayName(formatted);
+    setGeneratedLink(buildInvitationLink(window.location.origin, formatted));
   };
 
-  const copyToClipboard = async () => {
+  const message = generatedLink ? buildInvitationMessage(displayName, generatedLink) : '';
+
+  const copy = async (text: string, label: string) => {
     try {
-      await navigator.clipboard.writeText(generatedLink);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
-    } catch (err) {
-      console.error('Failed to copy: ', err);
+      await navigator.clipboard.writeText(text);
+    } catch {
+      // Fallback for browsers without clipboard API permission
+      const ta = document.createElement('textarea');
+      ta.value = text;
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand('copy');
+      document.body.removeChild(ta);
     }
+    setToast(label);
+    setTimeout(() => setToast(''), 2000);
   };
 
   return (
-    <div className="min-h-screen bg-[#0f110e] text-white selection:bg-primary/30">
+    <div className="min-h-screen bg-[#fdf6f8] text-[#3a3b38] selection:bg-primary/30">
       {/* Background Decor */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-primary/5 rounded-full blur-[120px]" />
-        <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-secondary/5 rounded-full blur-[120px]" />
+        <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-primary/15 rounded-full blur-[120px]" />
+        <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-secondary/15 rounded-full blur-[120px]" />
       </div>
 
-      <div className="relative z-10 max-w-4xl mx-auto px-6 py-12 md:py-20">
+      <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 py-12 md:py-20">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -50,11 +61,11 @@ export default function AdminPage() {
           <div className="p-3 rounded-2xl bg-primary/10 border border-primary/20 mb-6">
             <Settings className="w-8 h-8 text-primary" />
           </div>
-          <h1 className="font-serif text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-white via-primary to-white bg-clip-text text-transparent">
-            Link Generator
+          <h1 className="font-serif text-4xl md:text-5xl font-bold mb-4 text-[#8f3d60] text-center">
+            Invitation Link Generator
           </h1>
-          <p className="text-white/60 text-center max-w-md">
-            Create personalized invitation links for your guests. Choose their title and enter their name.
+          <p className="text-[#71736e] text-center max-w-md">
+            {WEDDING.brideName} &amp; {WEDDING.groomName} — create a personalized link and WhatsApp message for each guest.
           </p>
         </motion.div>
 
@@ -64,26 +75,27 @@ export default function AdminPage() {
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.1 }}
-            className="p-8 rounded-3xl border border-white/10 bg-white/5 backdrop-blur-xl shadow-2xl"
+            className="p-6 sm:p-8 rounded-3xl border border-primary/20 bg-white shadow-[0_20px_50px_rgba(235,129,169,0.12)] h-fit"
           >
             <div className="space-y-6">
               <div>
-                <label className="block text-xs font-bold uppercase tracking-widest text-primary mb-3">
-                  Salutation
+                <label htmlFor="prefix" className="block text-xs font-bold uppercase tracking-widest text-secondary mb-3">
+                  Select Prefix
                 </label>
                 <div className="relative">
                   <select
-                    value={title}
-                    onChange={(e) => setTitle(e.target.value)}
-                    className="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3 outline-none focus:border-primary/50 transition-colors appearance-none cursor-pointer"
+                    id="prefix"
+                    value={prefix}
+                    onChange={(e) => setPrefix(e.target.value as GuestPrefix)}
+                    className="w-full bg-[#fdf6f8] border border-primary/20 rounded-xl px-4 py-3 outline-none focus:border-primary transition-colors appearance-none cursor-pointer"
                   >
-                    {titles.map((t) => (
-                      <option key={t} value={t} className="bg-[#1a1c1a]">
-                        {t}
+                    {GUEST_PREFIXES.map((p) => (
+                      <option key={p} value={p}>
+                        {p}
                       </option>
                     ))}
                   </select>
-                  <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-white/40">
+                  <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-primary">
                     <svg className="w-4 h-4 fill-current" viewBox="0 0 20 20">
                       <path d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" />
                     </svg>
@@ -92,32 +104,52 @@ export default function AdminPage() {
               </div>
 
               <div>
-                <label className="block text-xs font-bold uppercase tracking-widest text-primary mb-3">
+                <label htmlFor="guest" className="block text-xs font-bold uppercase tracking-widest text-secondary mb-3">
                   Guest Name
                 </label>
                 <div className="relative">
-                  <User className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-white/40" />
+                  <User className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-primary/60" />
                   <input
+                    id="guest"
                     type="text"
                     value={name}
                     onChange={(e) => setName(e.target.value)}
-                    placeholder="Enter full name"
-                    className="w-full bg-black/40 border border-white/10 rounded-xl pl-12 pr-4 py-3 outline-none focus:border-primary/50 transition-colors placeholder:text-white/20"
+                    onKeyDown={(e) => e.key === 'Enter' && generateLink()}
+                    placeholder="e.g. Sanjaya"
+                    className="w-full bg-[#fdf6f8] border border-primary/20 rounded-xl pl-12 pr-4 py-3 outline-none focus:border-primary transition-colors placeholder:text-[#71736e]/50"
                   />
                 </div>
               </div>
 
               <button
                 onClick={generateLink}
-                disabled={!name}
-                className="w-full group relative overflow-hidden rounded-xl bg-primary px-6 py-4 font-bold text-[#0f110e] transition-all hover:scale-[1.02] active:scale-[0.98] disabled:opacity-50 disabled:hover:scale-100"
+                disabled={!name.trim()}
+                className="w-full rounded-xl bg-primary px-6 py-4 font-bold text-white transition-all hover:scale-[1.02] active:scale-[0.98] disabled:opacity-50 disabled:hover:scale-100"
               >
-                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700" />
-                <span className="relative flex items-center justify-center gap-2">
+                <span className="flex items-center justify-center gap-2">
                   <Sparkles className="w-4 h-4" />
-                  Generate Invitation Link
+                  Generate Link
                 </span>
               </button>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <button
+                  onClick={() => copy(generatedLink, 'Link copied!')}
+                  disabled={!generatedLink}
+                  className="flex items-center justify-center gap-2 px-4 py-3 rounded-xl border border-secondary/40 text-[#5f6f3c] bg-secondary/10 hover:bg-secondary/20 transition-all font-semibold text-sm disabled:opacity-40 disabled:cursor-not-allowed"
+                >
+                  <Copy className="w-4 h-4" />
+                  Copy Link Only
+                </button>
+                <button
+                  onClick={() => copy(message, 'Message copied!')}
+                  disabled={!generatedLink}
+                  className="flex items-center justify-center gap-2 px-4 py-3 rounded-xl bg-secondary text-white hover:brightness-95 transition-all font-semibold text-sm disabled:opacity-40 disabled:cursor-not-allowed"
+                >
+                  <MessageCircle className="w-4 h-4" />
+                  Copy Full Message
+                </button>
+              </div>
             </div>
           </motion.div>
 
@@ -126,68 +158,63 @@ export default function AdminPage() {
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.2 }}
-            className="flex flex-col"
+            className="flex flex-col gap-6 min-w-0"
           >
             {generatedLink ? (
-              <div className="p-8 rounded-3xl border border-primary/20 bg-primary/5 backdrop-blur-xl h-full flex flex-col justify-between border-dashed">
-                <div>
-                  <div className="flex items-center gap-2 text-primary mb-4">
-                    <LinkIcon className="w-4 h-4" />
-                    <span className="text-xs font-bold uppercase tracking-widest">Your Personalized Link</span>
-                  </div>
-                  <div className="p-4 rounded-xl bg-black/60 border border-white/5 break-all text-sm font-mono text-white/80 leading-relaxed">
-                    {generatedLink}
-                  </div>
+              <>
+                <div className="p-6 rounded-3xl border border-primary/20 bg-white">
+                  <p className="text-xs font-bold uppercase tracking-widest text-secondary mb-2">Greeting Preview</p>
+                  <p className="font-serif text-2xl text-[#8f3d60]">Dear {displayName} ❤️</p>
+                  <p className="mt-3 text-sm text-[#71736e] italic">
+                    On the website: “We cordially invite {displayName} to celebrate our special day with us.”
+                  </p>
                 </div>
 
-                <div className="mt-8 space-y-4">
-                  <button
-                    onClick={copyToClipboard}
-                    className="w-full flex items-center justify-center gap-3 px-6 py-4 rounded-xl border border-primary/30 bg-primary/10 hover:bg-primary/20 transition-all font-semibold"
-                  >
-                    {copied ? (
-                      <>
-                        <Check className="w-5 h-5 text-green-400" />
-                        <span className="text-green-400">Copied to Clipboard!</span>
-                      </>
-                    ) : (
-                      <>
-                        <Copy className="w-5 h-5 text-primary" />
-                        <span className="text-primary">Copy Link</span>
-                      </>
-                    )}
-                  </button>
-                  
-                  <div className="p-4 rounded-xl bg-white/5 border border-white/10 text-[11px] text-white/40 italic leading-relaxed">
-                    Preview: To {title} {name}
+                <div className="p-6 rounded-3xl border border-dashed border-primary/30 bg-white">
+                  <div className="flex items-center gap-2 text-primary mb-3">
+                    <LinkIcon className="w-4 h-4" />
+                    <span className="text-xs font-bold uppercase tracking-widest">Invitation Link</span>
                   </div>
+                  <a
+                    href={generatedLink}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="block p-4 rounded-xl bg-[#fdf6f8] border border-primary/10 break-all text-sm font-mono text-[#3a3b38] hover:text-primary"
+                  >
+                    {generatedLink}
+                  </a>
                 </div>
-              </div>
+
+                <div className="p-6 rounded-3xl border border-secondary/30 bg-white">
+                  <p className="text-xs font-bold uppercase tracking-widest text-secondary mb-3">Full Message</p>
+                  <pre className="whitespace-pre-wrap break-words font-sans text-sm leading-relaxed text-[#3a3b38]">{message}</pre>
+                </div>
+              </>
             ) : (
-              <div className="p-8 rounded-3xl border border-white/5 bg-white/[0.02] backdrop-blur-xl h-full flex flex-col items-center justify-center text-center opacity-50 grayscale">
-                <div className="w-16 h-16 rounded-full border border-dashed border-white/20 flex items-center justify-center mb-6">
-                  <LinkIcon className="w-6 h-6 text-white/20" />
+              <div className="p-8 rounded-3xl border border-primary/10 bg-white/60 h-full min-h-64 flex flex-col items-center justify-center text-center text-[#71736e]">
+                <div className="w-16 h-16 rounded-full border border-dashed border-primary/30 flex items-center justify-center mb-6">
+                  <LinkIcon className="w-6 h-6 text-primary/50" />
                 </div>
-                <p className="text-sm">Link will appear here after generation</p>
+                <p className="text-sm">The link and message preview will appear here after you click Generate Link.</p>
               </div>
             )}
           </motion.div>
         </div>
-
-        {/* Footer Info */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.4 }}
-          className="mt-12 text-center"
-        >
-          <div className="inline-flex items-center gap-3 px-6 py-2 rounded-full bg-white/5 border border-white/10 text-[10px] uppercase tracking-[0.2em] text-white/40">
-            <span>Confidential Admin Access</span>
-            <span className="w-1 h-1 rounded-full bg-primary/40" />
-            <span>Secure Generator</span>
-          </div>
-        </motion.div>
       </div>
+
+      <AnimatePresence>
+        {toast && (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 20 }}
+            className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 flex items-center gap-2 rounded-full bg-[#3a3b38] px-5 py-3 text-sm text-white shadow-xl"
+          >
+            <Check className="w-4 h-4 text-secondary" />
+            {toast}
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }
