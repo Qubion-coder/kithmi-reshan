@@ -21,10 +21,36 @@ const pinyonScript = Pinyon_Script({
   variable: '--font-script'
 })
 
+const SITE_URL = 'https://kithmi-reshan-weddinginvitation.vercel.app'
+const SITE_TITLE = 'KITHMI & RESHAN Wedding'
+const SITE_DESCRIPTION = 'Join us as we celebrate the wedding of Kithmi and Reshan on January 23, 2027.'
+
 export const metadata: Metadata = {
-  title: 'KITHMI & RESHAN Wedding',
-  description: 'Join us as we celebrate the wedding of Kithmi and Reshan on January 23, 2027.',
+  metadataBase: new URL(SITE_URL),
+  title: SITE_TITLE,
+  description: SITE_DESCRIPTION,
   generator: 'v0.app',
+  openGraph: {
+    type: 'website',
+    url: SITE_URL,
+    siteName: SITE_TITLE,
+    title: SITE_TITLE,
+    description: SITE_DESCRIPTION,
+    images: [
+      {
+        url: '/og-image.jpg',
+        width: 1200,
+        height: 1200,
+        alt: 'Kithmi & Reshan wedding invitation',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: SITE_TITLE,
+    description: SITE_DESCRIPTION,
+    images: ['/og-image.jpg'],
+  },
   icons: {
     icon: '/images/favicon-kr.png',
     apple: '/images/favicon-kr.png',
