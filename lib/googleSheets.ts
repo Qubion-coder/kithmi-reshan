@@ -7,14 +7,11 @@ interface SubmitPayload {
   message?: string;
 }
 
+const GOOGLE_SCRIPT_URL =
+  'https://script.google.com/macros/s/AKfycbzrWUdGEPXo_NfukHH1GxEg5dINeutgMti4KVQEM8WGJNROOA91uhGDlAggKcE9PbSr/exec';
+
 export async function submitToGoogleSheets(payload: SubmitPayload): Promise<void> {
-  const scriptUrl = process.env.NEXT_PUBLIC_GOOGLE_SCRIPT_URL;
-
-  if (!scriptUrl) {
-    throw new Error('Missing NEXT_PUBLIC_GOOGLE_SCRIPT_URL');
-  }
-
-  await fetch(scriptUrl, {
+  await fetch(GOOGLE_SCRIPT_URL, {
     method: 'POST',
     mode: 'no-cors',
     headers: {
